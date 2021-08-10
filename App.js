@@ -32,7 +32,7 @@ export default function App() {
 
   const placeholderMeme = memeTemplateImageUris[0];
   const [imgUri, setImgUri] = React.useState(placeholderMeme);
-  let memeView = null;
+  const memeView = React.useRef();
 
   return (
     <View style={styles.container}>
@@ -46,12 +46,7 @@ export default function App() {
         onChangeText={(text) => setBottomText(text)}
         value={bottomText}
       />
-      <View
-        collapsable={false}
-        ref={(ref) => {
-          memeView = ref;
-        }}
-      >
+      <View collapsable={false} ref={memeView}>
         <Image
           source={{ uri: imgUri }}
           style={{ height: screenWidth, width: screenWidth }}
@@ -65,15 +60,15 @@ export default function App() {
         onPress={() => choosePhotoAsync(setImgUri)}
       />
       <View style={{ flexDirection: "row" }}>
-        {memeTemplateImageUris.map((imgUri) => {
-          let uri = imgUri;
+        {memeTemplateImageUris.map((uri) => {
           return (
             <TouchableOpacity
+              key={uri}
               onPress={() => {
                 setImgUri(uri);
               }}
             >
-              <Image source={{ uri: imgUri }} style={styles.templateImage} />
+              <Image source={{ uri }} style={styles.templateImage} />
             </TouchableOpacity>
           );
         })}
@@ -84,7 +79,7 @@ export default function App() {
 }
 
 async function takePhotoAsync(setImgUri) {
-  // In production, minimize expensive calls to Permissions by storing the values in React State
+  // Asking for Permissions is slow. In production, store these values in React State
   const { status } = await ImagePicker.requestCameraPermissionsAsync();
   const isSuccessful = status === "granted";
   if (!isSuccessful) {
@@ -99,7 +94,7 @@ async function takePhotoAsync(setImgUri) {
 }
 
 async function choosePhotoAsync(setImgUri) {
-  // In production, minimize expensive calls to Permissions by storing the values in React State
+  // Asking for Permissions is slow. In production, store these values in React State
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
   const isSuccessful = status === "granted";
   if (!isSuccessful) {
@@ -117,6 +112,10 @@ async function choosePhotoAsync(setImgUri) {
 }
 
 async function shareAsync(memeView) {
+  if (!memeView.current) {
+    console.log("The memeView is not rendered yet, cannot share");
+    return;
+  }
   const imgUri = await captureRef(memeView, {
     format: "png",
     quality: 0.5,
