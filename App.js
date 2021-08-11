@@ -84,6 +84,7 @@ async function takePhotoAsync(setImgUri) {
   const isSuccessful = status === "granted";
   if (!isSuccessful) {
     alert("Camera permissions not granted");
+    return;
   }
 
   const image = await ImagePicker.launchCameraAsync();
@@ -99,6 +100,7 @@ async function choosePhotoAsync(setImgUri) {
   const isSuccessful = status === "granted";
   if (!isSuccessful) {
     alert("Media Library permissions not granted");
+    return;
   }
 
   const image = await ImagePicker.launchImageLibraryAsync({
