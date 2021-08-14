@@ -16,6 +16,10 @@ import * as ImagePicker from "expo-image-picker";
 // Converts a React View to a png
 import { captureRef } from "react-native-view-shot";
 
+import TakePhotoButton from "./components/TakePhotoButton";
+import ChoosePhotoButton from "./components/ChoosePhotoButton";
+import SharePhotoButton from "./components/SharePhotoButton";
+
 const { width: screenWidth } = Dimensions.get("window");
 
 const memeTemplateImageUris = [
@@ -54,11 +58,8 @@ export default function App() {
         <Text style={[styles.memeText, { top: 5 }]}>{topText}</Text>
         <Text style={[styles.memeText, { bottom: 5 }]}>{bottomText}</Text>
       </View>
-      <Button title="Take a Photo" onPress={() => takePhotoAsync(setImgUri)} />
-      <Button
-        title="Choose a Photo"
-        onPress={() => choosePhotoAsync(setImgUri)}
-      />
+      <TakePhotoButton setImgUri={setImgUri} />
+      <ChoosePhotoButton setImgUri={setImgUri} />
       <View style={{ flexDirection: "row" }}>
         {memeTemplateImageUris.map((uri) => {
           return (
@@ -73,83 +74,9 @@ export default function App() {
           );
         })}
       </View>
-      <Button title="Share Meme" onPress={() => shareAsync(memeView)} />
+      <SharePhotoButton memeView={memeView} />
     </View>
   );
-}
-
-async function takePhotoAsync(setImgUri) {
-  // Asking for Permissions is slow. In production, store these values in React State
-  const { status } = await ImagePicker.requestCameraPermissionsAsync();
-  const isSuccessful = status === "granted";
-  if (!isSuccessful) {
-    alert("Camera permissions not granted");
-    return;
-  }
-
-  const image = await ImagePicker.launchCameraAsync();
-  if (!image.cancelled) {
-    // { cancelled: false, type: 'image', uri, width, height, exif, base64 }
-    setImgUri(image.uri);
-  }
-}
-
-async function choosePhotoAsync(setImgUri) {
-  // Asking for Permissions is slow. In production, store these values in React State
-  const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-  const isSuccessful = status === "granted";
-  if (!isSuccessful) {
-    alert("Media Library permissions not granted");
-    return;
-  }
-
-  const image = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.All,
-    allowsEditing: true,
-    aspect: [1, 1],
-  });
-  if (!image.cancelled) {
-    setImgUri(image.uri);
-  }
-}
-
-async function shareAsync(memeView) {
-  if (!memeView.current) {
-    console.log("The memeView is not rendered yet, cannot share");
-    return;
-  }
-  const imgUri = await captureRef(memeView, {
-    format: "png",
-    quality: 0.5,
-    result: "data-uri",
-  });
-
-  const cloudUri = await uploadImageAsync(imgUri);
-  console.log("meme uploaded to", cloudUri);
-  Share.share({ url: cloudUri });
-}
-
-async function uploadImageAsync(uri) {
-  const formData = new FormData();
-  formData.append("image", {
-    uri: uri,
-    name: "upload.png",
-    type: "image/png",
-  });
-
-  const response = await fetch("https://api.imgur.com/3/image", {
-    method: "POST",
-    body: formData,
-    headers: {
-      // replace with your own API key
-      Authorization: "Client-ID 658d72e5b4a0c6b",
-    },
-  });
-  let responseJson = await response.json();
-  console.log(responseJson);
-  let url = responseJson.data.link;
-
-  return url;
 }
 
 const styles = StyleSheet.create({
