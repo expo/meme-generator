@@ -19,11 +19,11 @@ import { captureRef } from "react-native-view-shot";
 const { width: screenWidth } = Dimensions.get("window");
 
 const memeTemplateImageUris = [
-  "https://i.imgflip.com/2/1bij.jpg",
-  "https://i.imgflip.com/2/1bgw.jpg",
   "https://i.imgflip.com/2/4t0m5.jpg",
-  "https://i.imgflip.com/1og7s3.jpg",
-  "https://i.imgur.com/QT8j0d8.png",
+  "https://imgflip.com/s/meme/Creepy-Condescending-Wonka.jpg",
+  "https://i.imgflip.com/3jysf6.png",
+  "https://i.imgflip.com/3j1z70.jpg",
+  "https://imgflip.com/s/meme/Arthur-Fist.jpg",
 ];
 
 export default function App() {
