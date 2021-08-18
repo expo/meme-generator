@@ -275,8 +275,7 @@ import ChoosePhotoButton from "./components/ChoosePhotoButton";
 
 <img src="https://user-images.githubusercontent.com/6380927/129820700-738654cc-6da2-4d44-94b8-7598c3f2791e.png" width="400" height="800">
 
-
-1. Make a new file in the `components` folder called `SharePhotoButton.js`:
+1. Add the `"react-native-view-shot": "3.1.2"` dependency in your package.json. Make a new file in the `components` folder called `SharePhotoButton.js`:
 
 ```
 import * as React from "react";
@@ -328,4 +327,51 @@ async function uploadImageAsync(uri) {
   return url;
 }
 
+```
+
+2. In `App.js`, add the `SharePhotoButton`
+
+```
+//  App.js
+import SharePhotoButton from "./components/SharePhotoButton";
+
+//  ...
+//      <Text style={[styles.memeText, {top: 5}]}> {topText} </Text>
+//       <Text style={[styles.memeText, {bottom: 5}]}> {bottomText} </Text>
+//     </View>
+//
+//    <TakePhotoButton setImgUri={setImgUri} />
+//    <ChoosePhotoButton setImgUri={setImgUri} />
+      <SharePhotoButton memeView={memeView} />
+```
+
+3. Add references to the meme view
+
+```
+// App.js
+// export default function App() {
+//   const [topText, setTopText] = React.useState("");
+//   const [bottomText, setBottomText] = React.useState("");
+//
+//   const placeholderMeme = memeTemplateImageUris[0];
+//   const [imgUri, setImgUri] = React.useState(placeholderMeme);
+
+     const memeView = React.useRef();
+
+// ...
+//   return (
+//     <View style={styles.container}>
+//       <TextInput
+//         style={styles.textInput}
+//         onChangeText={(text) => setTopText(text)}
+//         value={topText}
+//       />
+//       <TextInput
+//         style={styles.textInput}
+//         onChangeText={(text) => setBottomText(text)}
+//         value={bottomText}
+//       />
+
+      // Change this view to be collapsible with a reference to memeView
+      <View collapsable={false} ref={memeView}>
 ```
