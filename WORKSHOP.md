@@ -2,6 +2,8 @@
 
 ## Two Text Inputs
 
+<img src="https://user-images.githubusercontent.com/6380927/129955924-a5e552d5-189b-418d-9d45-ef56b3a9d3ae.png" width="400" height="600">
+
 1. Let's start coding - change your `App.js` to a blank screen:
 
 ```
@@ -78,6 +80,8 @@ export default function App() {
 ```
 
 ## Template Memes
+
+<img src="https://user-images.githubusercontent.com/6380927/129956018-c11d9eba-a512-46d5-88b7-0046686f2293.png" width="400" height="600">
 
 1. Hardcode a doge meme below our text inputs:
 
