@@ -158,6 +158,8 @@ const memeTemplateImageUris = [
 
 ## Image Picker - Take Photo
 
+<img src="https://user-images.githubusercontent.com/6380927/129820577-756f66bc-5da5-4679-b060-f73382ca954d.png" width="400" height="800">
+
 1. Make a new file in the `components` folder called `TakePhotoButton.js`
 
 ```
@@ -212,6 +214,8 @@ import TakePhotoButton from "./components/TakePhotoButton";
 
 ## Image Picker - Choose Photo
 
+<img src="https://user-images.githubusercontent.com/6380927/129820473-36a29a6c-ff9e-4001-8ef7-9be0a086f70c.png" width="400" height="800">
+
 1. Make a new file in the `components` folder called `ChoosePhotoButton.js`
 
 ```
@@ -264,6 +268,9 @@ import ChoosePhotoButton from "./components/ChoosePhotoButton";
 ```
 
 ## Share Photo
+
+<img src="https://user-images.githubusercontent.com/6380927/129820700-738654cc-6da2-4d44-94b8-7598c3f2791e.png" width="400" height="800">
+
 
 1. Make a new file in the `components` folder called `SharePhotoButton.js`:
 
