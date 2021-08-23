@@ -1,6 +1,6 @@
 # Meme Generator
 
-This is a Meme Generator app built with Expo and React Native. You'll be able to create a meme from existing templates. You can also make a custom meme using the Camera API and the Image library. Your completed meme will be uploaded to imgur so you can share it with your friends.
+This is a Meme Generator app built with Expo and React Native. You'll be able to create a meme from existing templates or use the Camera API and the Image library for a custom image. Your completed meme will be uploaded to Imgur so you can share it with your friends.
 
 ![Screen Shot 2021-08-23 at 4 36 29 PM](https://user-images.githubusercontent.com/6380927/130532966-1047b8a8-4b24-4d54-9a8c-848bd09dafe0.png)
 
