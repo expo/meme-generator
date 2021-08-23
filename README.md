@@ -2,6 +2,8 @@
 
 This is a Meme Generator app built with Expo and React Native.
 
+![Screen Shot 2021-08-23 at 4 36 29 PM](https://user-images.githubusercontent.com/6380927/130532966-1047b8a8-4b24-4d54-9a8c-848bd09dafe0.png)
+
 ## Setting Up
 
 1. Download the Expo Go app from the Google Play or Apple App Store.
