@@ -1,4 +1,6 @@
-# Meme Generator
+# Meme Generator Workshop
+
+These are the step-by-step instructions for the Meme Generator workshop. For Setup instructions, go [here](./README.md).
 
 ## Two Text Inputs
 
